@@ -15,8 +15,9 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@monorepo-test/is-even": ["packages/is-even/src/index.ts"],
       "@monorepo-test/is-odd": ["packages/is-odd/src/index.ts"],
-      "@monorepo-test/is-even": ["packages/is-even/src/index.ts"]
+      "@monorepo-test/my-plugin": ["packages/my-plugin/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
