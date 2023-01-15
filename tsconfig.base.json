@@ -15,7 +15,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@myorg/is-even": ["packages/is-even/src/index.ts"]
+      "@monorepo-test/is-odd": ["packages/is-odd/src/index.ts"],
+      "@monorepo-test/is-even": ["packages/is-even/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

@@ -1,5 +1,5 @@
 {
-  "name": "@monorepo-test/is-even",
+  "name": "@monorepo-test/is-odd",
   "version": "0.0.1",
   "type": "commonjs"
 }
