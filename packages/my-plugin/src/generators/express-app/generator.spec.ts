@@ -2,11 +2,11 @@ import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
 import { Tree, readProjectConfiguration } from '@nrwl/devkit';
 
 import generator from './generator';
-import { MyPluginGeneratorSchema } from './schema';
+import { ExpressAppGeneratorSchema } from './schema';
 
-describe('my-plugin generator', () => {
+describe('express-app generator', () => {
   let appTree: Tree;
-  const options: MyPluginGeneratorSchema = { name: 'test' };
+  const options: ExpressAppGeneratorSchema = { name: 'test' };
 
   beforeEach(() => {
     appTree = createTreeWithEmptyWorkspace();
