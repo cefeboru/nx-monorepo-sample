@@ -49,12 +49,13 @@ function addFiles(tree: Tree, options: NormalizedSchema) {
 
 export default async function (tree: Tree, options: ExpressAppGeneratorSchema) {
   const normalizedOptions = normalizeOptions(tree, options);
-  addFiles(tree, normalizedOptions);
 
   await expressGenerator(tree, {
      ...options,
      skipPackageJson: false,
   });
+
+  addFiles(tree, normalizedOptions);
   
   await formatFiles(tree);
 }

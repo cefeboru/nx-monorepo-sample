@@ -15,11 +15,22 @@ This will set up the @nrwl/js plugin for you, which allow us to generate package
 
 Run `nx graph` to see a diagram of the dependencies of the projects.
 
-## Adding a library/package
+## Generating a library/package
 
 ```
 nx g @nrwl/js:lib my-buildable-lib --buildable
 ```
+
+## Generating an express application
+```
+npx nx generate @monorepo-test/my-plugin:express-app test-express
+```
+Generated express app will have some features by default:
+ - Typescript ready
+ - Increased security with Helmet middleware
+ - Requests logging with Morgan
+ - Rate limiting
+
 
 
 

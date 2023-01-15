@@ -1,0 +1,48 @@
+/**
+ * This is not a production server yet!
+ * This is only a minimal backend to get started.
+ */
+
+import * as express from 'express';
+import * as path from 'path';
+import * as morgan from 'morgan';
+import helmet from 'helmet';
+import rateLimit from 'express-rate-limit'
+
+const limiter = rateLimit({
+	windowMs: 15 * 60 * 1000, // 15 minutes
+	max: 5, // low value for demo purposes
+	standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
+	legacyHeaders: false, // Disable the `X-RateLimit-*` headers
+})
+
+const app = express();
+
+app.use(morgan(':method :url :status :response-time ms - :res[content-length]'));
+
+
+// Apply the rate limiting middleware to all requests
+app.use(limiter)
+
+app.use(helmet());
+
+app.use('/assets', express.static(path.join(__dirname, 'assets')));
+
+app.get('/api', (req, res) => {
+  res.send({ message: 'Welcome to test-express!' });
+});
+
+app.get('/health', (req, res) => {
+  // https://testfully.io/blog/api-health-check-monitoring/
+  res.header('Cache-Control', 'no-cache');
+  res.send({
+    ready: true,
+    alive: true,
+  })
+});
+
+const port = process.env.port || 3333;
+const server = app.listen(port, () => {
+  console.log(`<%= projectName %> is listening at http://localhost:${port}/api`);
+});
+server.on('error', console.error);
