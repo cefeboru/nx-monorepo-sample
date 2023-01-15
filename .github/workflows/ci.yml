@@ -6,10 +6,6 @@ on:
       - main
   pull_request:
 
-env:
-  NX_BASE: ${{ github.event_name == 'pull_request' && 'refs/remotes/origin/main' || github.event.before }}
-  NX_HEAD: ${{ github.event_name == 'pull_request' && github.event.pull_request.base.ref || github.event.before }}
-
 # This allows a subsequently queued workflow run to interrupt previous runs
 concurrency:
   group: '${{ github.workflow }} @ ${{ github.event.pull_request.head.label || github.head_ref || github.ref }}'
@@ -30,5 +26,9 @@ jobs:
 
       - name: Install
         run: npm ci
+      - name: Run affected tests for PR
+        if: ${{  github.event_name == 'pull_request' }}
+        run: npx nx affected:test --base main --head 'refs/remotes/origin/${{ github.event.pull_request.base.ref }}'
       - name: Run affected tests
-        run: npx nx affected:test
+        if: ${{ github.event_name == 'push' }}
+        run: npx nx affected:test --base ${{ github.event.before }} --head 'refs/remotes/origin/${{ github.event.pull_request.base.ref }}'
