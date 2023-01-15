@@ -17,6 +17,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
       - name: Setup node
         uses: actions/setup-node@v3
@@ -31,4 +33,4 @@ jobs:
         run: npx nx affected:test --base main --head 'refs/remotes/origin/${{ github.event.pull_request.base.ref }}'
       - name: Run affected tests
         if: ${{ github.event_name == 'push' }}
-        run: npx nx affected:test --base ${{ github.event.before }} --head 'refs/remotes/origin/${{ github.event.pull_request.base.ref }}'
+        run: npx nx affected:test --base ${{ github.event.before }} --head 'refs/remotes/origin/main'
