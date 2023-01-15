@@ -3,11 +3,11 @@ name: 'CI Workflow'
 on:
   push:
     branches:
-      - master
+      - main
   pull_request:
 
 env:
-  NX_BASE: ${{ github.event_name == 'pull_request' && 'refs/remotes/origin/master' || github.event.before }}
+  NX_BASE: ${{ github.event_name == 'pull_request' && 'refs/remotes/origin/main' || github.event.before }}
 
 # This allows a subsequently queued workflow run to interrupt previous runs
 concurrency:
